@@ -1,0 +1,77 @@
+<md-dialog aria-label="CREAR USUARIO" class="modal-form" ng-init="wordTemp = null">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Información de cuenta</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content class="md-no-momentum">
+        <form id="form" name="form" ng-submit="form.$valid && ctrl.iSubmit(ctrl.const.M_USER_CREATE)" novalidate> 
+            <md-input-container class="md-icon-float md-block">
+                <label>Apellidos</label>
+                <md-icon class="material-icons">account_circle</md-icon>
+                <input name="apellidos" ng-model="ctrl.user.apellidos" type="text" 
+                       uppercase
+                       solo-texto
+                       required>
+                <div class="item-required" ng-messages="form.apellidos.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Campo requerido.</div>
+                </div>                   
+            </md-input-container>
+            <md-input-container class="md-icon-float md-block">
+                <label>Nombres</label>
+                <md-icon class="material-icons">account_circle</md-icon>
+                <input name="nombres" ng-model="ctrl.user.nombres" type="text" 
+                       uppercase
+                       solo-texto                       
+                       required>
+                <div class="item-required" ng-messages="form.nombres.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Campo requerido.</div>
+                </div>                 
+            </md-input-container>            
+            <md-input-container class="md-block">
+                <md-icon class="material-icons email">account_circle</md-icon>
+                <input name="email" ng-model="ctrl.user.correo" type="email" placeholder="Correo Electronico" 
+                       uppercase                      
+                       required>
+                <div class="item-required" ng-messages="form.email.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Campo requerido.</div>
+                    <div ng-message="email">Email no valido.</div>
+                </div>                 
+            </md-input-container>            
+            <md-input-container class="md-block">
+                <md-icon class="material-icons">account_circle</md-icon>
+                <input ng-model="ctrl.user.codigo" type="text" placeholder="Codigo (opcional)"
+                       uppercase>
+            </md-input-container>            
+            <p><b>Ingrese sus palabra clave</b></p>                    
+            <md-input-container md-no-float class="md-block">
+                <input name="word1" ng-model="wordTemp" type="text" placeholder="Palabra Clave 1" uppercase autocomplete="off" required>
+                <md-icon class="material-icons">spellcheck</md-icon>
+                <div class="item-required" ng-messages="form.word1.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Campo requerido.</div>
+                </div>                    
+            </md-input-container>                          
+            <md-input-container md-no-float class="md-block">
+                <input name="word2" ng-model="ctrl.user.palabraClave" type="text" placeholder="Palabra Clave 2" autocomplete="off" 
+                       ng-change="ctrl.iEvent(ctrl.const.M_USER_CREATE, form, wordTemp)"
+                       uppercase ng-required="wordTemp != null">
+                <md-icon class="material-icons">spellcheck</md-icon>
+                <div class="item-required" ng-messages="form.word2.$error" multiple md-auto-hide="false">
+                    <div ng-message="required">Campo requerido.</div>
+                    <div ng-message="validationError">Las palabras no coinciden.</div>
+                </div>                 
+            </md-input-container>                             
+        </form>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <div layout="row" flex="50" layout-align="end center">
+            <md-button style="background: #023357;" class="md-primary bt_font" flex ng-click="ctrl.iModal(ctrl.const.M_CLOSE)"><i class="material-icons bt_icon_modal">cancel</i><span class="oculta600">CANCELAR</span></md-button>
+        </div>
+        <div layout="row" flex="50" layout-align="end center">
+            <md-button style="background: #023357;" class="md-primary bt_font" flex form="form" type="submit"><i class="material-icons bt_icon_modal">save</i><span class="oculta600">CREAR CUENTA</span></md-button>
+        </div>
+    </md-dialog-actions>    
+</md-dialog>    
+</html>
+
+

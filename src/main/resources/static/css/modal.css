@@ -1,0 +1,259 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20-nov-2018, 10:45:20
+    Author     : Bryan Luis Valdez Jara <ibryan.valdez@gmail.com>
+*/
+
+/* Modal*/
+.modal-form{
+    border-radius: 7px;
+    box-shadow: 0 0 6px #333333;
+    max-width: 600px;
+    min-width: 600px;    
+}
+.modal-form md-toolbar{
+    display: flex;
+    background: #023357;
+    box-shadow: 0 0 4px #333333;
+    padding: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+.modal-form md-toolbar .md-button.btn-close{
+    top: 0px;
+    position: absolute;
+    right: 0;
+    margin: 0;
+}
+.modal-form md-toolbar .btn-close md-icon{
+    font-weight: bold;
+    color: #b5b5b5;
+    font-size: 22px;
+}
+.modal-form md-toolbar .btn-close:hover md-icon{
+    color: #FFFFFF;
+}
+
+.modal-form .md-toolbar-tools{
+    display: flex;
+    justify-content: center;
+}
+
+.modal-form .md-toolbar-tools h2, .modal-form .md-toolbar-tools h1{
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-form form label{
+    font-size: 15px;
+}
+.modal-form form .md-input, .modal-form form md-select md-select-value .md-text{
+/*    font-size: 18px;    */
+    color: #4a4a49;
+/*    font-weight: bold;*/
+}
+.modal-form form .md-input-focused label, .modal-form form md-select md-select-value span{
+    color: #9d9d9c;
+    font-size: 15px;
+}
+.modal-form form .md-input-focused .md-input, 
+.modal-form form .md-input-focused md-select:not([disabled]):focus .md-select-value{
+    border-bottom-color: #4a4a49;    
+}
+
+.modal-form form .hint{
+    font-size: 12px;
+    color: rgb(157, 157, 156);
+}
+
+.modal-form md-dialog-actions .md-button{
+    font-size: 12px;
+    font-weight: normal;
+    background-color: #023357;
+    color: #fff;
+}
+
+.modal-form md-dialog-actions .btn-cancel{
+    color: #e51c23;
+}
+
+.modal-form md-dialog-actions .btn-confirm{
+    color: #023357;
+}
+
+.modal-form form span.inline-label{
+    color: rgb(157, 157, 156);
+    font-size: 15px;
+}
+
+.modal-form .md-button.btn-new{
+    width: 45px;
+    height: 45px;
+}
+.modal-form md-input-container, .modal-form md-select{
+    margin: 10px 0; 
+}
+.modal-form md-tabs{
+    border-radius: 0;
+}
+.modal-form md-tabs md-tabs-wrapper{
+    background: #023357;
+}
+
+.modal-form md-tabs .md-tab.md-active{
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.modal-form md-tabs .md-tab{    
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+    text-align: right;
+}
+.modal-form md-tabs md-ink-bar {
+    color: #FFFFFF;
+    background: #FFFFFF;
+    height: 3px;
+}
+
+.modal-form md-dialog-content {
+    padding: 15px 30px 15px 30px;
+}
+
+.btn_action{
+    background-color: #023357;    
+}
+
+/* Modal Big*/
+.modal-form-big{
+    border-radius: 0;
+    box-shadow: 0 0 6px #333333;
+    max-width: 1200px;
+    min-width: 1200px;    
+}
+.modal-form-big md-toolbar{
+    background: #023357;
+    box-shadow: 0 0 4px #333333;
+    padding: 70px 10px 15px 10px;
+    color: #FFFFFF;
+    overflow: hidden;
+    min-height: 165px;
+}
+.modal-form-big md-toolbar .md-button.btn-close{
+    top: 0px;
+    position: absolute;
+    right: 0;
+    margin: 0;
+}
+.modal-form-big md-toolbar .btn-close md-icon{
+    font-weight: bold;
+    color: #b5b5b5;
+    font-size: 22px;
+}
+.modal-form-big md-toolbar .btn-close:hover md-icon{
+    color: #FFFFFF;
+}
+
+.modal-form-big .md-toolbar-tools{
+    display: block;
+}
+
+.modal-form-big .md-toolbar-tools h2, .modal-form-big .md-toolbar-tools h1{
+    font-size: 30.5px;
+    font-weight: bold;
+    margin: 5px 0px 0px 0px;
+}
+
+.modal-form-big form label{
+    font-size: 15px;
+}
+.modal-form-big form .md-input, .modal-form-big form md-select md-select-value .md-text{
+    font-size: 18px;    
+    color: #4a4a49;
+    font-weight: bold;
+}
+.modal-form-big form .md-input-focused label, .modal-form-big form md-select md-select-value span{
+    color: #9d9d9c;
+    font-size: 15px;
+}
+.modal-form-big form .md-input-focused .md-input, 
+.modal-form-big form .md-input-focused md-select:not([disabled]):focus .md-select-value{
+    border-bottom-color: #4a4a49;    
+}
+
+.modal-form-big form .hint{
+    font-size: 12px;
+    color: rgb(157, 157, 156);
+}
+
+.modal-form-big md-dialog-actions .md-button{
+    font-size: 21px;
+    font-weight: normal;
+    color: #023357;
+}
+
+.modal-form-big md-dialog-actions .btn-cancel{
+    color: #e51c23;
+}
+
+.modal-form-big md-dialog-actions .btn-confirm{
+    color: #023357;
+}
+
+.modal-form-big form span.inline-label{
+    color: rgb(157, 157, 156);
+    font-size: 15px;
+}
+
+.modal-form-big .md-button.btn-new{
+    width: 45px;
+    height: 45px;
+}
+.modal-form-big md-input-container, .modal-form-big md-select{
+    margin: 10px 0; 
+}
+.modal-form-big md-tabs{
+    border-radius: 0;
+}
+.modal-form-big md-tabs md-tabs-wrapper{
+    background: #023357;
+}
+
+.modal-form-big md-tabs .md-tab.md-active{
+    color: #FFFFFF;
+    font-weight: bold;
+}
+
+.modal-form-big md-tabs .md-tab{    
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 18px;
+    text-align: right;
+}
+.modal-form-big md-tabs md-ink-bar {
+    color: #FFFFFF;
+    background: #FFFFFF;
+    height: 3px;
+}
+
+.modal-form-big md-dialog-content {
+    padding: 30px;
+}
+
+
+.modal-tab md-dialog-content{
+    padding: 0;
+}
+.modal-tab md-tabs-content-wrapper {
+    padding: 30px;
+}
+
+.modal-tab md-toolbar{
+    min-height: 120px;
+    box-shadow: none;
+}
+/* end Modal*/

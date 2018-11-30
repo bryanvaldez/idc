@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html ng-app="app" 
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"   
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+    <head>
+        <title>Layout page</title>  
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"  /> 
+        <meta http-equiv="X-UA-Compatible" content="IE=9" />        
+        <link rel="stylesheet" media="screen" th:href="@{/css/reset.css}"/>          
+        <link rel="stylesheet" media="screen" th:href="@{/css/lib/angular-material.min.css}"/>  
+        <link rel="stylesheet" media="screen" th:href="@{/css/lib/material-icon.css}"/>          
+        <link rel="stylesheet" media="screen" th:href="@{/css/styles.css}"/>        
+        <link rel="stylesheet" media="screen" th:href="@{/css/modal.css}"/>          
+        
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/lib/angular.min.js}"></script>  
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/lib/angular-aria.min.js}"></script>  
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/lib/angular-animate.min.js}"></script>  
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/lib/angular-material.min.js}"></script>  
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/lib/angular-messages.min.js}"></script>  
+        <script charset="UTF-8" type="text/javascript" th:src="@{/js/app.js}"></script>         
+        
+    </head>
+    <body ng-cloak layout="column">
+
+        <div layout="row" flex>
+            <div layout="column" flex> 
+                <div layout:fragment="content"></div>
+            </div>    
+        </div>                   
+    </body>
+</html>
