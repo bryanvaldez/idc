@@ -5,12 +5,13 @@
  */
 package mx.gob.issemym.idc.config;
 
+import java.util.Arrays;
 import mx.gob.issemym.idc.filter.AuthFilter;
 import mx.gob.issemym.idc.filter.CORSFilter;
 import mx.gob.issemym.idc.filter.IdcFilter;
 import mx.gob.issemym.idc.filter.WebFilter;
 //import mx.gob.issemym.idc.handler.CustomSuccessHandler;
-import mx.gob.issemym.idc.service.UserService;
+import mx.gob.issemym.idc.service.impl.CustomUserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,12 +43,12 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 public class IdcSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    @Qualifier("usuarioService")
-    private UserService userService;
+    @Qualifier("CustomUserDetailsServiceImpl")
+    private CustomUserDetailsServiceImpl customUserDetailsServiceImpl;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
+        auth.userDetailsService(customUserDetailsServiceImpl);
 //        auth
 //                .inMemoryAuthentication()
 //                .withUser("user")
@@ -55,24 +57,37 @@ public class IdcSecurity extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {        
         http.cors().and().csrf().disable().authorizeRequests()
                 //          .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .antMatchers("/login").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new AuthFilter("/login", authenticationManager()), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new WebFilter(), UsernamePasswordAuthenticationFilter.class);
-        //.addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class);
+                .addFilterBefore(new WebFilter(), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new CORSFilter(), ChannelProcessingFilter.class);
 //                .httpBasic();
     }
+    
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/user/create");
+    }    
 
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }
+//    @Bean
+//    CorsConfigurationSource corsConfigurationSource() {
+//        final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+//        return source;
+////        CorsConfiguration configuration = new CorsConfiguration();
+////        configuration.setAllowedOrigins(Arrays.asList("*"));
+////        configuration.setAllowCredentials(true);
+////        configuration.setAllowedHeaders(Arrays.asList("Access-Control-Allow-Headers","Access-Control-Allow-Origin","Access-Control-Request-Method", "Access-Control-Request-Headers","Origin","Cache-Control", "Content-Type", "Authorization"));
+////        configuration.setAllowedMethods(Arrays.asList("DELETE", "GET", "POST", "PATCH", "PUT"));
+////        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+////        source.registerCorsConfiguration("/**", configuration);
+////        return source;
+//    }
 
 //    
 //    @Autowired
@@ -93,8 +108,8 @@ public class IdcSecurity extends WebSecurityConfigurerAdapter {
 //    
     @Bean
     public PasswordEncoder passwordEncoder() {
-        //return new BCryptPasswordEncoder();
-        return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
+        //return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 //    
 //    @Override

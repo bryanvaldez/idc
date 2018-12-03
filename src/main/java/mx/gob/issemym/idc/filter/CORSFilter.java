@@ -38,13 +38,17 @@ public class CORSFilter extends GenericFilterBean{
             HttpServletRequest req = (HttpServletRequest) request;
             HttpServletResponse res = (HttpServletResponse) response;
 
-            res.setHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
-            res.setHeader("Access-Control-Allow-Credentials", "true");
+            res.setHeader("Access-Control-Allow-Origin", "*");
             res.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
             res.setHeader("Access-Control-Max-Age", "3600");
-            res.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me");
+            res.setHeader("Access-Control-Allow-Headers", "X-PINGOTHER,Content-Type,X-Requested-With,accept,Origin,Access-Control-Request-Method,Access-Control-Request-Headers,Authorization");            
+            res.addHeader("Access-Control-Expose-Headers", "Authorization");                                             
 
-            chain.doFilter(request, response);
+            if ("OPTIONS".equals(req.getMethod())) {
+             res.setStatus(HttpServletResponse.SC_OK);
+            } else { 
+             chain.doFilter(req, res);
+            }
 
     }
     

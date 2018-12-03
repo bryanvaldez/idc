@@ -13,6 +13,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import mx.gob.issemym.idc.constant.SecurityConstants;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 
@@ -22,15 +23,13 @@ import org.springframework.security.core.Authentication;
  */
 public class JwtUtil {
     
-    //Algoritmo encrypt
-    private static final Algorithm algorithm = Algorithm.HMAC512("secrect"); 
+    private static final Algorithm algorithm = Algorithm.HMAC512(SecurityConstants.SECRET); 
     
     public static void addAuthentication(HttpServletResponse response , String username){
                   
         try {         
-            //Firma Usuario
             String token = JWT.create().withIssuer(username).sign(algorithm);
-            response.addHeader("Authorization","Bearer " +  token);
+            response.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX +  token);
         } catch (JWTCreationException e) {
             System.out.println("JWT: " +e);
         }        
@@ -39,28 +38,19 @@ public class JwtUtil {
     
     public static Authentication getAuthentication(HttpServletRequest request){
     
-        try {
-            //Obtenemos el token del encabezado 
-            String token = request.getHeader("Authorization");
-            
+        try { 
+            String token = request.getHeader(SecurityConstants.HEADER_STRING);            
             if(token != null){
-                String user = JWT.require(algorithm).build().verify(token.replace("Bearer ", "")).getIssuer();
-                
-//                JWTVerifier verifier = JWT.require(algorithm).withIssuer("admin").build();                                
-//                DecodedJWT jwt = verifier.verify(token.replace("Bearer ", ""));    
-//                String user = jwt.getIssuer();
-
-//https://auth0.com/blog/implementing-jwt-authentication-on-spring-boot/
-                
+                String user = JWT.require(algorithm).build().verify(token.replace(SecurityConstants.TOKEN_PREFIX, "")).getIssuer();
                 
                 if(user != null){  
                     return new UsernamePasswordAuthenticationToken(user, null, Collections.emptyList());
                 }                
-                return null;
-                
+                return null;                
             }
             
         } catch (JWTCreationException e) {
+            System.out.println("JWT: " +e);
         }
         return null;
     }
