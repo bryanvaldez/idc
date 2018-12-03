@@ -15,6 +15,7 @@ import mx.gob.issemym.idc.service.UserService;
 import mx.gob.issemym.idc.service.dto.CcUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,10 +41,11 @@ public class UserController {
 //    }
 
     @PostMapping(value="/user/create", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public UserMessageResponse saveCourse(@RequestBody CcUserDTO user){
+    public UserMessageResponse saveCourse(@RequestBody CcUser user){
         UserMessageResponse message = new UserMessageResponse();
-        try {
-            //userService.saveCourse(user);
+        try {            
+            user.setSPwd(new BCryptPasswordEncoder().encode("123"));
+            userService.saveCourse(user);
             message.setCode(1);
             message.setMessage("The user was saved successfully");
         } catch (Exception e) {
