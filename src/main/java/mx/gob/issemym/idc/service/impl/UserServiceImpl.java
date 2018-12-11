@@ -5,9 +5,11 @@
  */
 package mx.gob.issemym.idc.service.impl;
 
+import java.util.List;
 import mx.gob.issemym.idc.persistence.model.CcUser;
 import mx.gob.issemym.idc.persistence.repository.CcUserRepository;
 import mx.gob.issemym.idc.service.UserService;
+import mx.gob.issemym.idc.service.dto.CcUserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +29,13 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void saveCourse(CcUser user) {
+    public void save(CcUser user) {
         ccUserRepository.save(user);
+    }
+
+    @Override
+    public List<CcUser> findAllUsers() {
+        return ccUserRepository.findAll();
     }
     
 }

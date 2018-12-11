@@ -5,7 +5,9 @@
  */
 package mx.gob.issemym.idc.service;
 
+import java.util.List;
 import mx.gob.issemym.idc.persistence.model.CcUser;
+import mx.gob.issemym.idc.service.dto.CcUserDTO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,5 +17,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserService{    
     CcUser findBySMail(String email);     
-    void saveCourse(CcUser user);  
+    void save(CcUser user);  
+    List<CcUser> findAllUsers();
 }

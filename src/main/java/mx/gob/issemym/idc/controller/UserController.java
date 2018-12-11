@@ -7,6 +7,7 @@ package mx.gob.issemym.idc.controller;
 
 import java.security.Principal;
 import java.util.Base64;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import mx.gob.issemym.idc.controller.message.UserMessageResponse;
 import mx.gob.issemym.idc.persistence.model.CcUser;
@@ -45,7 +46,7 @@ public class UserController {
         UserMessageResponse message = new UserMessageResponse();
         try {            
             user.setSPwd(new BCryptPasswordEncoder().encode("123"));
-            userService.saveCourse(user);
+            userService.save(user);
             message.setCode(1);
             message.setMessage("The user was saved successfully");
         } catch (Exception e) {
@@ -55,5 +56,10 @@ public class UserController {
         }
         return message;        
     }    
+    
+    @GetMapping(value="/findAllUser", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public List<CcUser> findAllUser(){
+        return userService.findAllUsers();      
+    }     
     
 }
